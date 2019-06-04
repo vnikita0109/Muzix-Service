@@ -71,15 +71,14 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track updateTrack(Track track) throws TrackNotFoundException {
-        Track existingTrack=null;
         if (trackRepository.existsById(track.getId())){
             track.setComments(track.getComments());
-            trackRepository.getOne(track.getId());
         }
         else
         {
             throw new TrackNotFoundException("Track does not exist");
         }
+        Track existingTrack=trackRepository.save(track);
         return existingTrack;
     }
     @Override

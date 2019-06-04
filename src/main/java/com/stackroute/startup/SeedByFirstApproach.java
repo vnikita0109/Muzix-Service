@@ -4,11 +4,9 @@ import com.stackroute.domain.Track;
 
 import com.stackroute.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -26,11 +24,11 @@ public class SeedByFirstApproach implements ApplicationListener<ContextRefreshed
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        track.setId(Integer.parseInt(environment.getProperty("track.id")));
+       /* track.setId(Integer.parseInt(environment.getProperty("track.id")));
         track.setTrackName(environment.getProperty("track.trackName"));
         track.setComments(environment.getProperty("track.comments"));
 
         trackRepository.save(track);
-
+*/
     }
 }

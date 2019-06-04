@@ -29,14 +29,14 @@ public class SeedBySecondApproach implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-      /*  track.setId(001);
+/*
+      *//*  track.setId(001);
         track.setTrackName("MyFirstSong");
-        track.setComments("MyFavoriteVoice");*/
+        track.setComments("MyFavoriteVoice");*//*
 
       track1.setId(id);
       track1.setTrackName(trackName);
       track1.setComments(comments);
-      trackRepository.save(track1);
+      trackRepository.save(track1);*/
     }
 }
