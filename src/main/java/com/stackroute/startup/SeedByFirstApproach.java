@@ -1,28 +1,36 @@
 package com.stackroute.startup;
 
 import com.stackroute.domain.Track;
-import lombok.Value;
+
+import com.stackroute.repository.TrackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SeedByFirstApproach implements ApplicationListener<ContextStartedEvent> {
-    Track track;
+@PropertySource("classpath:application.properties")
+public class SeedByFirstApproach implements ApplicationListener<ContextRefreshedEvent> {
+    Track track=new Track();
+
+    @Autowired
+    TrackRepository trackRepository;
+
+    @Autowired
+    private Environment environment;
+
+
     @Override
-    public void onApplicationEvent(ContextStartedEvent contextStartedEvent) {
-       track.setId(00);
-        track.setTrackName("MyTrack");
-        track.setComments("MyAlbum");
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        track.setId(Integer.parseInt(environment.getProperty("track.id")));
+        track.setTrackName(environment.getProperty("track.trackName"));
+        track.setComments(environment.getProperty("track.comments"));
 
+        trackRepository.save(track);
 
-       /* @Value("${trackId:00}")
-        private int trackId;
-
-        @Value("#{'${trackName:}'}")
-        private String trackName;
-
-        @Value("#{config['mongodb.url']?:'127.0.0.1'}")
-        private String mongodbUrl;*/
     }
 }
